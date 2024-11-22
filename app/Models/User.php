@@ -42,4 +42,44 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function phone()
+    {
+        return $this->hasOne(Phone::class);
+    }
+
+    public function phones()
+    {
+        return $this->hasMany(Phone::class);
+    }
+
+    /**
+     * Get the user's largest Priority.
+     */
+    public function largestPriorityPhone()
+    {
+        return $this->hasOne(Phone::class)->ofMany('Priority', 'min');
+    }
+
+    /**
+     * Get the sim name.
+     */
+    public function simName()
+    {
+        return $this->hasOneThrough(SimName::class, Phone::class);
+    }
+    
+    //many to many
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id')->as('user_role');
+        // ->as('user_role') by defult pivot but change 
+    }
+
+    // One to One (Polymorphic)
+    public function image(): MorphOne
+    {
+        return $this->morphOne(Images::class, 'imageable');
+    }
+
 }
