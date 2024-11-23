@@ -168,6 +168,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        App\Providers\RiakServiceProvider::class,
+
     ])->toArray(),
 
     /*
@@ -184,5 +187,10 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+
+
+    'notification' => [
+        'driver' => 'email', // Change to 'sms' for SMS service
+    ],
 
 ];

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ORMController;
 use App\Http\Controllers\CustomeGuardController;
+use App\Http\Controllers\CustomServiceContanierAndProviderController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,12 +47,16 @@ Route::get('/admin/custome/guard/login', [CustomeGuardController::class, 'loginP
 Route::post('/admin/custome/guard/login', [CustomeGuardController::class, 'login']);
 
 Route::middleware('admin')->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('adminDashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/custome/guard/user', [CustomeGuardController::class, 'user']);
 });
 
+//service contanier and provider
+Route::middleware('auth')->group(function () {
+    Route::get('/custome/service/contanier', [CustomServiceContanierAndProviderController::class, 'serviceContanier']);
+    Route::get('/send-notification', [CustomServiceContanierAndProviderController::class, 'sendNotification']);
+
+});
 
 
 require __DIR__.'/auth.php';
