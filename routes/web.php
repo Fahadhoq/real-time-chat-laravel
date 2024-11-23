@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ORMController;
+use App\Http\Controllers\CustomeGuardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+// orm relationship
 Route::get('/test/hasOne', [ORMController::class, 'hasOne']);
 Route::get('/test/hasMany', [ORMController::class, 'hasMany']);
 Route::get('/test/belongsTo', [ORMController::class, 'belongsTo']);
@@ -36,6 +39,18 @@ Route::get('/test/manyToMany', [ORMController::class, 'manyToMany']);
 Route::get('/test/oneToOne_Polymorphic', [ORMController::class, 'oneToOne_Polymorphic']);
 Route::get('/test/oneToMany_Polymorphic', [ORMController::class, 'oneToMany_Polymorphic']);
 Route::get('/test/manyToMany_Polymorphic', [ORMController::class, 'manyToMany_Polymorphic']);
+
+//custome guard and middleware
+Route::get('/admin/custome/guard/login', [CustomeGuardController::class, 'loginPage'])->name('admin.login');
+Route::post('/admin/custome/guard/login', [CustomeGuardController::class, 'login']);
+
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('adminDashboard');
+    })->name('admin.dashboard');
+    Route::get('/admin/custome/guard/user', [CustomeGuardController::class, 'user']);
+});
+
 
 
 require __DIR__.'/auth.php';

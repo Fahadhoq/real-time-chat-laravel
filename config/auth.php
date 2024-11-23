@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session', // Or any other driver like 'token'
+            'provider' => 'admins', // Link to a user provider
+        ],
     ],
 
     /*
@@ -69,6 +73,11 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'admins' => [
+            'driver' => 'eloquent', // Use 'database' if needed
+            'model' => App\Models\Admin::class, // Your custom user model
+        ],
     ],
 
     /*
