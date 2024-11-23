@@ -51,11 +51,12 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/custome/guard/user', [CustomeGuardController::class, 'user']);
 });
 
-//service contanier and provider
+//service contanier and provider and facade
 Route::middleware('auth')->group(function () {
     Route::get('/custome/service/contanier', [CustomServiceContanierAndProviderController::class, 'serviceContanier']);
     Route::get('/send-notification', [CustomServiceContanierAndProviderController::class, 'sendNotification']);
-
+    // facade
+    Route::get('/facade', [CustomServiceContanierAndProviderController::class, 'createUser']);
 });
 
 

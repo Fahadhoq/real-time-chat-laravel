@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\RiskNotificationService;
 
 class RiakServiceProvider extends ServiceProvider
 {
@@ -11,7 +12,9 @@ class RiakServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(RiskNotificationService::class, function ($app) {
+            return new RiskNotificationService();
+        });
     }
 
     /**

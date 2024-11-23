@@ -10,7 +10,7 @@ use Illuminate\View\View;
 use App\Services\CustomService;
 use App\Services\NotificationServiceInterface;
 use App\Models\User;
-
+use Risk;
 class CustomServiceContanierAndProviderController extends Controller
 {
     private $notificationService;
@@ -32,6 +32,16 @@ class CustomServiceContanierAndProviderController extends Controller
     public function serviceContanier(CustomService $service)
     {
         return $service->handle();
+    }
+
+
+    //facade
+    public function createUser(Request $request)
+    {
+        $message = "New user has been created!";
+        $notificationResponse = Risk::sendNotification($message);
+
+        return response()->json(['message' => $notificationResponse]);
     }
 
 
