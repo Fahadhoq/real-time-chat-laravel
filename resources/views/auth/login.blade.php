@@ -44,4 +44,23 @@
             </x-primary-button>
         </div>
     </form>
+
+    <div class='text-center my-4'>
+        <hr class='my-4'>
+        <span class='w-3/5 mx-auto mt-4'>
+            <div>
+                <a href="{{ route('google.redirect') }}">
+                    <x-primary-button class="ms-3">
+                    Continue With Google
+                    </x-primary-button>
+                </a>
+                @if (session('error'))
+                    <div class="alert alert-danger mt-3" role="alert" style="font-size: 14px; padding: 10px;">
+                        <strong>Error!</strong> {{ session('error') }}
+                    </div>
+                @endif
+            </div>
+        </span>
+    </div>
+
 </x-guest-layout>

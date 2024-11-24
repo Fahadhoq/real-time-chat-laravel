@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomeGuardController;
 use App\Http\Controllers\CustomServiceContanierAndProviderController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,12 @@ Route::middleware('auth')->group(function () {
     // facade
     Route::get('/facade', [CustomServiceContanierAndProviderController::class, 'createUser']);
 });
+
+
+//Socialite
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle'])->name('google.callback');
+
 
 
 require __DIR__.'/auth.php';
