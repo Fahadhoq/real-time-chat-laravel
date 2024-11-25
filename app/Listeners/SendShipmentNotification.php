@@ -10,7 +10,7 @@ use App\Models\User;
 class SendShipmentNotification
 {
     /**
-     * Create the event listener.
+     * Create the event listener. 
      */
     public function __construct()
     {
