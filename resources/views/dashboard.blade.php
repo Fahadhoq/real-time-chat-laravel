@@ -14,4 +14,18 @@
             </div>
         </div>
     </div>
+
+    <div class='text-center my-4'>
+        <hr class='my-4'>
+        <span class='w-3/5 mx-auto mt-4'>
+            <div>
+                <h1>Event</h1>
+                <a href="{{ route('order.ship') }}">
+                    <button class="ms-3">
+                    Click or order ship
+                    </button>
+                </a>
+            </div>
+        </span>
+    </div>
 </x-app-layout>

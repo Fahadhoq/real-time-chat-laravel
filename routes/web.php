@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomServiceContanierAndProviderController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.redirect');
 Route::get('/auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle'])->name('google.callback');
 
+//event
+Route::get('/order/ship', [OrderController::class, 'oderShip'])->name('order.ship');
 
 
 require __DIR__.'/auth.php';
