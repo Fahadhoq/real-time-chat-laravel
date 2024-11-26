@@ -18,7 +18,7 @@ class OrderController extends Controller
     }  
 
     public function msg(Request $request){
-        event(new TestData($request->msg));
+        event(new TestData($request->msg, Auth::user()));
     } 
 
 }

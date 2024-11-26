@@ -14,14 +14,16 @@ class TestData implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $data;
+    public $messeng;
+    public $user;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($data)
+    public function __construct($messeng,$user)
     {
-        $this->data = $data;
+        $this->messeng = $messeng;
+        $this->user = $user;
     }
 
     //if need custom-name chanale name

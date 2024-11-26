@@ -70,7 +70,7 @@ Route::get('/auth/google/call-back', [GoogleAuthController::class, 'callbackGoog
 Route::get('/order/ship', [OrderController::class, 'oderShip'])->name('order.ship');
 
 //web socket
-Route::get('/webSocket/msg', [OrderController::class, 'msg'])->name('webSocket.msg');
+Route::post('/webSocket/msg', [OrderController::class, 'msg'])->name('webSocket.msg');
 
 
 require __DIR__.'/auth.php';
