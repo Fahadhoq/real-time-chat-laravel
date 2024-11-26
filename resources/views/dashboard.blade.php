@@ -30,35 +30,70 @@
     </div>
 
     <div>
-        <p><b>Real-Time Msg:</b> <span id="test-data"></span></p>
-
+        
         <div>
             <input class="form-control" type="text" name="msg" id="msg"> 
             <button class="ms-3" id="send_msg">
                 Send Msg
             </button>
         </div>
+
+        <p><b>Real-Time How Many User Join:</b> <span id="user-join"></span></p>
+        <p><b>Real-Time New Joiner:</b> <span id="new-joiner"></span></p>
+        <p><b>Real-Time New Leaver:</b> <span id="new-leaver"></span></p>
+        <p><b>Real-Time Msg:</b> <span id="test-data"></span></p>
      
         <!-- Inline script -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 //socket msg start
-                if (typeof window.Echo !== 'undefined') {
-                    window.Echo.channel('test-channel')
-                        .listen('TestData', (data) => {
-                            document.getElementById('test-data').innerHTML = data.data;
-                        });
-                } else {
-                    console.log('Echo is not defined in the Blade script.');
-                }
+                    //public channel
+                    // if (typeof window.Echo !== 'undefined') {
+                    //     window.Echo.channel('test-channel')
+                    //         .listen('TestData', (data) => {
+                    //             document.getElementById('test-data').innerHTML = data.data;
+                    //         });
+                    // } else {
+                    //     console.log('Echo is not defined in the Blade script.');
+                    // }
+
+                    //private channel
+                    // if (typeof window.Echo !== 'undefined') {
+                    //     window.Echo.private('test-PrivateChannel')
+                    //         .listen('TestData', (data) => {
+                    //             document.getElementById('test-data').innerHTML = data.data;
+                    //         });
+                    // } else {
+                    //     console.log('Echo is not defined in the Blade script.');
+                    // }
+
+                    //presence channel
+                    if (typeof window.Echo !== 'undefined') {
+                        window.Echo.join('test-PresenceChannel')
+                            .here((user)=>{
+                                document.getElementById('user-join').innerHTML = user.length;
+                            })
+                            .joining((user)=>{
+                                document.getElementById('new-joiner').innerHTML = user.name;
+                            })
+                            .leaving((user)=>{
+                                document.getElementById('new-leaver').innerHTML = user.name;
+                            })
+                            .listen('TestData', (data) => {
+                                console.log('Broadcasted Data:', data); 
+                                document.getElementById('test-data').innerHTML = data.data;
+                            });
+                    } else {
+                        console.log('Echo is not defined in the Blade script.');
+                    }
                 //socket msg end
  
                 //call api
                 $(document).on('click', '#send_msg', function(){
                     var csrf_token = $('input[name=_token]').val();  
                     var msg = $('#msg').val();
-                    console.log(msg);
+                   
                     var url = '/webSocket/msg'; 
 
                         $.ajaxSetup({

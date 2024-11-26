@@ -24,6 +24,20 @@ class TestData implements ShouldBroadcast
         $this->data = $data;
     }
 
+    //if need custom-name chanale name
+    // public function broadcastAs()
+    // {
+    //     return 'custom-name';
+    // }
+
+    //if need a static msg with data
+    // public function broadcastWith()
+    // {
+    //     return [
+    //         'data' => $this->data . ', How are you?'
+    //     ];
+    // }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -34,7 +48,15 @@ class TestData implements ShouldBroadcast
         // return [
         //     new PrivateChannel('channel-name'),
         // ];
+        
+        //Public Channel
+        // return new Channel('test-channel');
 
-        return new Channel('test-channel');
+        //Private Channel
+        // return new PrivateChannel('test-PrivateChannel');
+
+        //PresenceChannel 
+        return new PresenceChannel('test-PresenceChannel');
+
     }
 }
