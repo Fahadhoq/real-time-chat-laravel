@@ -28,4 +28,59 @@
             </div>
         </span>
     </div>
+
+    <div>
+        <p><b>Real-Time Msg:</b> <span id="test-data"></span></p>
+
+        <div>
+            <input class="form-control" type="text" name="msg" id="msg"> 
+            <button class="ms-3" id="send_msg">
+                Send Msg
+            </button>
+        </div>
+     
+        <!-- Inline script -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                //socket msg start
+                if (typeof window.Echo !== 'undefined') {
+                    window.Echo.channel('test-channel')
+                        .listen('TestData', (data) => {
+                            document.getElementById('test-data').innerHTML = data.data;
+                        });
+                } else {
+                    console.log('Echo is not defined in the Blade script.');
+                }
+                //socket msg end
+ 
+                //call api
+                $(document).on('click', '#send_msg', function(){
+                    var csrf_token = $('input[name=_token]').val();  
+                    var msg = $('#msg').val();
+                    console.log(msg);
+                    var url = '/webSocket/msg'; 
+
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                            }
+                        });
+                    
+                    $.ajax({  
+                            url: url,  
+                            type: 'get',  
+                            data: {
+                                msg : msg,
+                                "_token": "{{ csrf_token() }}"
+                                },  
+                            success:function(data){  
+                                console.log('success'); 
+                            }  
+                    });  
+                });
+            });
+        </script>
+    </div>
 </x-app-layout>
+
