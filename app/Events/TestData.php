@@ -16,14 +16,18 @@ class TestData implements ShouldBroadcast
 
     public $messeng;
     public $user;
+    public $receiver_id;
+    public $sender_id;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($messeng,$user)
+    public function __construct($messeng,$user,$receiver_id,$sender_id)
     {
         $this->messeng = $messeng;
         $this->user = $user;
+        $this->receiver_id = $receiver_id;
+        $this->sender_id = $sender_id;
     }
 
     //if need custom-name chanale name

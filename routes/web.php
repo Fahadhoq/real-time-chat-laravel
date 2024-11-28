@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [ChatController::class, 'userList'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -70,7 +70,12 @@ Route::get('/auth/google/call-back', [GoogleAuthController::class, 'callbackGoog
 Route::get('/order/ship', [OrderController::class, 'oderShip'])->name('order.ship');
 
 //web socket
-Route::post('/webSocket/msg', [OrderController::class, 'msg'])->name('webSocket.msg');
+Route::post('/webSocket/msg', [ChatController::class, 'msg'])->name('webSocket.msg');
 
+//dynamic chat
+Route::middleware('auth')->group(function () {
+    Route::get('/user/list', [ChatController::class, 'userList']);
+    Route::get('/old/msg', [ChatController::class, 'oldMsg']);
+});
 
 require __DIR__.'/auth.php';
