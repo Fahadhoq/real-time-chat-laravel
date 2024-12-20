@@ -166,6 +166,10 @@
                     Chat with: <span id="selected-user-name">User Name</span>
                 </div>
 
+                <div id="msg_load" style="padding: 10px; background-color: #eaeaea; text-align: center; font-weight: bold; display: none;">
+                    Msg Load Time: <span id="msg_load_time"></span>
+                </div>
+
                 <!-- Messages -->
                 <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto; background-color: #f4f4f4;">
                     <!-- Messages will appear here -->
@@ -259,6 +263,7 @@
 
                     // Show the selected user header
                     $('#selected-user').show();
+                    
 
                     // Enable the Send button
                     if (receiver_id) {
@@ -282,8 +287,10 @@
                         type: 'get',
                         data: { receiver_id:receiver_id, sender_id:sender_id },
                         success: function (response) {
+                            $('#msg_load').show();
+                            $('#msg_load_time').text(response.execution_time);
                             // const messages = JSON.parse(response);
-                            appendOldMessage(response);
+                            appendOldMessage(response.chats);
                         }
                     });
                 });

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
+        "predis/predis": "^2.0",
         "pusher/pusher-php-server": "^7.0"
     },
     "require-dev": {
