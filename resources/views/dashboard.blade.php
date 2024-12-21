@@ -29,6 +29,20 @@
         </span>
     </div>
 
+    <div class='text-center my-4'>
+        <hr class='my-4'>
+        <span class='w-3/5 mx-auto mt-4'>
+            <div>
+                <h1>Make Job Dissatisfaction</h1>
+                <a href="{{ route('job.dissatisfaction') }}">
+                    <button class="ms-3">
+                    Click
+                    </button>
+                </a>
+            </div>
+        </span>
+    </div>
+
     <div>
         
     <style>

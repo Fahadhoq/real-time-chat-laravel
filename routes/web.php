@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChatController;
-
+use App\Http\Controllers\OpenAIController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +25,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('custome_log')->get('/dashboard', function () {
-    return view('dashboard');
-});
+// Route::middleware('custome_log')->get('/dashboard', function () {
+//     return view('dashboard');
+// });
 
 
-// Route::get('/dashboard', [ChatController::class, 'userList'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ChatController::class, 'userList'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -81,5 +81,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/list', [ChatController::class, 'userList']);
     Route::get('/old/msg', [ChatController::class, 'oldMsg']);
 });
+
+//open ai api
+Route::get('/Job/dissatisfaction', [OpenAIController::class, 'jobDissatisfaction'])->name('job.dissatisfaction');
+Route::post('/generate/text', [OpenAIController::class, 'generateText']);
+Route::post('/submit/answers', [OpenAIController::class, 'submitAnswers']);
 
 require __DIR__.'/auth.php';

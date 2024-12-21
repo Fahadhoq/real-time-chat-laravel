@@ -171,6 +171,9 @@ return [
 
         App\Providers\RiakServiceProvider::class,
 
+        App\Providers\OpenAIServiceProvider::class,
+
+
     ])->toArray(),
 
     /*
