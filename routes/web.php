@@ -25,8 +25,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('custome_log')->get('/dashboard', function () {
+    return view('dashboard');
+});
 
-Route::get('/dashboard', [ChatController::class, 'userList'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::get('/dashboard', [ChatController::class, 'userList'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
