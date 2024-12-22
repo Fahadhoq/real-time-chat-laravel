@@ -10,6 +10,7 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OpenAIController;
+use App\Http\Controllers\GoogleMapAIController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,5 +87,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/Job/dissatisfaction', [OpenAIController::class, 'jobDissatisfaction'])->name('job.dissatisfaction');
 Route::post('/generate/text', [OpenAIController::class, 'generateText']);
 Route::post('/submit/answers', [OpenAIController::class, 'submitAnswers']);
+
+//google map api
+Route::get('/map', [GoogleMapAIController::class, 'map'])->name('map');
 
 require __DIR__.'/auth.php';
