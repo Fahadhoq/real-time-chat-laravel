@@ -11,6 +11,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\GoogleMapAIController;
+use App\Http\Controllers\LinkedInController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,5 +92,11 @@ Route::post('/submit/answers', [OpenAIController::class, 'submitAnswers']);
 
 //google map api
 Route::get('/map', [GoogleMapAIController::class, 'map'])->name('map');
+
+//linkdin api
+Route::get('/linkedin/auth', [LinkedInController::class, 'redirect'])->name('linkedin.auth');
+Route::get('/linkedin/callback', [LinkedInController::class, 'handleCallback'])->name('linkedin.callback');
+Route::post('/linkedin/post', [LinkedInController::class, 'postToLinkedIn'])->name('linkedin.post');
+
 
 require __DIR__.'/auth.php';

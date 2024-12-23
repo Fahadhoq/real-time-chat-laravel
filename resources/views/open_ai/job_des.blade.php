@@ -58,7 +58,16 @@
         <div id="response-container" class="section"></div>
 
         <!-- Generated Job Description -->
-        <div id="job_description" class="section"></div>
+        <div id="job_description" class="section">
+            <!-- <button id="post-to-linkedin" class="btn btn-custom w-100 mt-3 d-none">Post to LinkedIn</button> -->
+        </div>
+
+        <form action="{{ route('linkedin.post') }}" method="POST">
+            @csrf
+            <textarea name="job_description_text" rows="3" placeholder="Write your post here..." required style="display: none;"></textarea>
+            <button type="submit" class="btn btn-primary">Post to LinkedIn</button>
+        </form>
+
     </div>
 
     <script>
@@ -135,6 +144,13 @@
                         '<h4>Generated Job Description:</h4>' +
                         '<div class="alert alert-info">' + generatedText + '</div>'
                     );
+
+                    // Store the description for posting
+                    $('#post-to-linkedin').data('description', generatedText);
+
+                    // Set the value of the hidden <textarea> for the LinkedIn post
+                   $('textarea[name="job_description_text"]').val(generatedText);
+
                 },
                 error: function (xhr) {
                     const error = xhr.responseJSON?.error || 'An error occurred';
@@ -142,6 +158,33 @@
                 }
             });
         });
+
+        // Handle posting to LinkedIn
+        // $(document).on('click', '#post-to-linkedin', function () {
+        //     const jobDescription = $(this).data('description');
+
+        //     // Show loading message
+        //     $(this).text('Posting...').prop('disabled', true);
+
+        //     $.ajax({
+        //         url: '/linkedin/post',
+        //         method: 'POST',
+        //         headers: {
+        //             'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token
+        //         },
+        //         contentType: 'application/json',
+        //         data: JSON.stringify({ description: jobDescription }),
+        //         success: function () {
+        //             alert('Job description successfully posted to LinkedIn!');
+        //             $('#post-to-linkedin').text('Post to LinkedIn').prop('disabled', false);
+        //         },
+        //         error: function (xhr) {
+        //             const error = xhr.responseJSON?.error || 'An error occurred';
+        //             alert(error);
+        //             $('#post-to-linkedin').text('Post to LinkedIn').prop('disabled', false);
+        //         }
+        //     });
+        // });
     </script>
 </body>
 </html>
