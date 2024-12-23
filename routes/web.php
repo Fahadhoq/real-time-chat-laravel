@@ -12,6 +12,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\OpenAIController;
 use App\Http\Controllers\GoogleMapAIController;
 use App\Http\Controllers\LinkedInController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,10 @@ Route::get('/map', [GoogleMapAIController::class, 'map'])->name('map');
 Route::get('/linkedin/auth', [LinkedInController::class, 'redirect'])->name('linkedin.auth');
 Route::get('/linkedin/callback', [LinkedInController::class, 'handleCallback'])->name('linkedin.callback');
 Route::post('/linkedin/post', [LinkedInController::class, 'postToLinkedIn'])->name('linkedin.post');
+
+//notification
+Route::get('/notification', [NotificationController::class, 'notificationList'])->name('notification');
+Route::get('/order/notification', [NotificationController::class, 'oderShip'])->name('order.notification');
 
 
 require __DIR__.'/auth.php';

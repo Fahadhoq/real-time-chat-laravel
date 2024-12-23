@@ -57,6 +57,20 @@
         </span>
     </div>
 
+    <div class='text-center my-4'>
+        <hr class='my-4'>
+        <span class='w-3/5 mx-auto mt-4'>
+            <div>
+                <h1>Notification</h1>
+                <a href="{{ route('notification') }}">
+                    <button class="ms-3">
+                    Click
+                    </button>
+                </a>
+            </div>
+        </span>
+    </div>
+
     <div>
         
     <style>

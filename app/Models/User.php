@@ -82,4 +82,9 @@ class User extends Authenticatable
         return $this->morphOne(Images::class, 'imageable');
     }
 
+    public function notifications()
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
+    }
+
 }
