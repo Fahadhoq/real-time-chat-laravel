@@ -3,7 +3,7 @@ name: FTP Deployment
 on:
   push:
     branches:
-      - notification
+      - master
 
 jobs:
   deploy:
