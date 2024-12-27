@@ -14,6 +14,7 @@ use App\Http\Controllers\GoogleMapAIController;
 use App\Http\Controllers\LinkedInController;
 use App\Http\Controllers\NotificationController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
