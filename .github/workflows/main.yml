@@ -1,0 +1,28 @@
+name: FTP Deployment
+
+on:
+  push:
+    branches:
+      - notification
+
+jobs:
+  deploy:
+    name: FTP Deploy Job
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: FTP Deploy
+      - name: FTP Deploy Forked
+        uses: snorux/FTP-Deploy-Action@1.3.2
+        with:
+          server: ftpupload.net
+          username: if0_37694479
+          password: qLQphFCzJXW
+          protocol: ftps
+          port: 21
+          local-dir: ./ # Deploy entire repository
+          server-dir: /htdocs/getUp_Assignment/
