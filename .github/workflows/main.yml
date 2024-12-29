@@ -7,19 +7,18 @@ on:
 
 jobs:
   deploy:
-    name: FTP Deploy Job
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout Repository
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # Step 2: Install Dependencies
-      - name: Install Composer Dependencies
+      - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-progress --prefer-dist
 
-      # Step 3: FTP Deploy
+      - name: Verify Vendor Directory
+        run: ls -la ./vendor
+
       - name: FTP Deploy Forked
         uses: snorux/FTP-Deploy-Action@1.3.2
         with:
@@ -28,5 +27,5 @@ jobs:
           password: qLQphFCzJXW
           protocol: ftps
           port: 21
-          local-dir: ./ # Deploy entire repository
+          local-dir: ./ # Ensure everything, including vendor, is uploaded
           server-dir: /htdocs/getUp_Assignment/
