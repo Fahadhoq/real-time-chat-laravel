@@ -19,14 +19,14 @@ jobs:
       # - name: Verify Vendor Directory
       #   run: ls -la ./vendor
 
-      - name: Cache Clearing
-        run: php artisan cache:clear
+      # - name: Cache Clearing
+      #   run: php artisan cache:clear
 
-      - name: Config Clearing
-        run: php artisan config:clear
+      # - name: Config Clearing
+      #   run: php artisan config:clear
         
-      - name: Config and Cache Clearing
-        run: php artisan key:generate 
+      # - name: Config and Cache Clearing
+      #   run: php artisan key:generate 
 
       - name: Install Npm
         run: npm install
