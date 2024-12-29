@@ -16,8 +16,8 @@ jobs:
       # - name: Install Dependencies
       #   run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Verify Vendor Directory
-        run: ls -la ./vendor
+      # - name: Verify Vendor Directory
+      #   run: ls -la ./vendor
 
       - name: Cache Clearing
         run: php artisan cache:clear
